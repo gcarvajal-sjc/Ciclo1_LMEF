@@ -36,25 +36,32 @@ def impuestosEmpleados():
         # Revisar si debe pagar impuestos
         if bdEmpleados[-1][-1] > 10000:
             # Coleccion (lista) empleados que pagan impuestos
-            empleadosImpuestos.append(bdEmpleados[-1])
+            empleadosImpuestos.append(bdEmpleados[-1].copy())
+            # empleadosImpuestos.append(list(bdEmpleados[-1]))
             # Agregar los impuestos en la penultima posicion
             empleadosImpuestos[-1].insert(-1,
                                           empleadosImpuestos[-1][-1] * 0.05)
 
-        if input('Ha terminado el registro? (s/n) ').lower() == 's':
+        if input("Ha terminado el registro? (s/n) ").lower() == 's':
             mainloop = False
 
-        # Calcular salario promedio general
-        salarioPromedio = 0
-        for empleado in bdEmpleados:
-            salarioPromedio += empleado[-1]
-        salarioPromedio = salarioPromedio/len(bdEmpleados)
-        print(
-            f'El salario promedio de la nomina ingresada es {salarioPromedio}')
+    # Calcular salario promedio general
+    salarioPromedio = 0
+    for empleado in bdEmpleados:
+        salarioPromedio += empleado[-1]
+    salarioPromedio = salarioPromedio/len(bdEmpleados)
+    print(f'El salario promedio de la nomina ingresada es {salarioPromedio}')
 
-        # Retornar los listados solictados
-        return bdEmpleados, empleadosImpuestos
+    # Retornar los listados solictados
+    return bdEmpleados, empleadosImpuestos
 
 
 # Seccion principal
-print(impuestosEmpleados())
+nomina, detalleEmpleadosPagaImpuestos = impuestosEmpleados()
+print('---- Nomina Completa ----')
+for i, empleado in enumerate(nomina):
+    print(f'{i+1}) {empleado}')
+
+print('---- Empleados que pagan impuestos ----')
+for i, empleado in enumerate(detalleEmpleadosPagaImpuestos):
+    print(f'{i+1}) {empleado}')
