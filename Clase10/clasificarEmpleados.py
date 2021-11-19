@@ -36,6 +36,9 @@ def impuestosEmpleados():
         # Revisar si debe pagar impuestos
         if bdEmpleados[-1][-1] > 10000:
             # Coleccion (lista) empleados que pagan impuestos
+            # Por referencia
+            empleadosImpuestos.append(bdEmpleados[-1])
+            # Por parametro las dos alternativas que siguen lineas 42 y 43 para que no use la referencia
             empleadosImpuestos.append(bdEmpleados[-1].copy())
             # empleadosImpuestos.append(list(bdEmpleados[-1]))
             # Agregar los impuestos en la penultima posicion
@@ -50,7 +53,8 @@ def impuestosEmpleados():
     for empleado in bdEmpleados:
         salarioPromedio += empleado[-1]
     salarioPromedio = salarioPromedio/len(bdEmpleados)
-    print(f'El salario promedio de la nomina ingresada es {salarioPromedio}')
+    print(
+        f'El salario promedio de la nomina ingresada es, {round(salarioPromedio,2)}')
 
     # Retornar los listados solictados
     return bdEmpleados, empleadosImpuestos
