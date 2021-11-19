@@ -1,0 +1,10 @@
+Estructuras Iterativas -> Condicional que nos lleva a la repeticion 
+de una serie de instrucciones (llamados a modulo)
+
+Podemos iterar de dos formas -> 
+while (cuando no sabemos cuantas veces se va a realizar un proceso)
+for(cuando tenemos un limite inferior un limite superior y un avance 
+especificos)
+
+Requerimiento  -> realizar un programa que imprima los 20 primeros
+numeros enteros

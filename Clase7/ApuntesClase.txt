@@ -1,0 +1,6 @@
+-Cadenas: son sucesiones de elementos alfanumericos: numeros tratadoscomo letras, letras,
+caracteres espciales (espacios signos de puntuacion, tabulaciones movimientos
+de carro)
+
+return f"El equipo ha sido aprobado'
+mensaje = 'hola'

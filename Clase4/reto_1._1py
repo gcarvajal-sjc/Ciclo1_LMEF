@@ -1,0 +1,24 @@
+'''Reportar promedio de notas de un total de 5 pero quitando la peor. 
+Las notas vienen en escala 100 pero hay que covertirlas a escala 5 
+redondeado a dos decimales. 
+Escribir una funcion que reciba como parametros: una cadena con el 
+codigo alfanumerico del estudiante y cinco numeros enteros (nota1, nota2
+nota3,nota4) y retorne una cadena de caracteres que le proporciona al
+profesorla info que desea obtener. La cadena debe tener la siguiente 
+estructura: "El promedio ajustado del estudiante{codigo} es: {promedio}'''
+
+# Algoritmo
+# calcular la menor de las notas
+# sacar el promedio
+# convertirlo a escala 5 y redondear a 2 decimales
+# reportar con mensaje
+
+
+def calcularPromedio(codigo, nota1, nota2, nota3, nota4, nota5):
+    menor = min((nota1, nota2, nota3, nota4, nota5))
+    promedio = (sum((nota1, nota2, nota3, nota4, nota5)) - menor) / 4
+    conversion = round(promedio*5/100, 2)
+    return f"El promedio ajustado del estudiante{codigo} es: {conversion}"
+
+
+print(calcularPromedio('abd3455', 40, 50, 39, 76, 96))

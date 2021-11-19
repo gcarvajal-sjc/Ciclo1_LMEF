@@ -1,0 +1,25 @@
+Operadores:
+    Aritmeticos: +, -, *, **, / division, // division entera, % modulo o residuo
+
+    Relacionales: >, <, <=, >=, ==, != (int, int -> bool)
+                                       (float, float -> bool)
+                                       (float, int -> bool)
+                                       (str, str -> bool)
+
+
+- Sentencia declarativa: Es algo que me dice si algo es verdadero o falso
+Ejemplos:
+* Hoy es lunes. (false)
+* Ahora es de dia (true)
+* Pedro es mayor que Juan (Pedro tiene 5 anios y Juan 12) (falso)
+* a = 12 , b = 14 -> a == b (false)
+Contraejemplos:
+* El arroz con pollo es el plato mas rico. (...) No se puede determinar T or false 
+* Falcao es el mejor delantero de la historia de Colombia (...) depende
+* El Real Madridi es el mejor equpo de la historia (...)
+* Las playas de la habana son las mas bonitas del caribe (...)
+
+- Ejemplo de requerimiento que necesita condicionales
+
+Programa que recibe dos numeros enteros y reporta si la suma de ellos es positiva
+

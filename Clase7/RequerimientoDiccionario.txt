@@ -1,0 +1,22 @@
+- Tras cerrar una convocatoria para desarrolladores de sw, se necesita
+procesar la info registrada por cada uno de los participantes. Esa 
+info llega encapsulada en un diccionario. Se requiere la contruccion de 
+una funcion que analice si el candidato es apto o no para una segunda 
+ronda de seleccion de personal. La informacion que llega del candidato 
+es la siguiente:
+1. Nombre completo
+2. Doc de identidad
+3. Años de experiencia desarrollando en el lenguaje java. (0,1,2,'3+', intermedios entre los numericos )
+4. Años de experiencia desarrollando en el lenguaje pascal. (0,1,2,'3+')
+5. Años de experiencia desarrollando en el lenguaje .NET. (0,1,2,'3+')
+6. Nivel de estudios (0,"Tecnico", "Profesional", "Posgrado")
+7. Años de egreso de la institucion educativa (0,1,'2+')
+
+El candidato sera apto para la siguiente ronda si el cumple con lo siguente:
+-Experiencia promedio de las tecnologias mencionadas mayor o igual a 1.5 Años
+-Minimo 2 años de experiencia
+-Si presenta un promedio de experiencia con las tecnologias mayor a 2.5 años entonces
+se ignora el tiempo de egreso.
+
+Observaciones: Algunos campos pueden llegar en formato string al tratarse 
+de un formulario con rangos.

@@ -1,0 +1,5 @@
+Se requiere una funcion que calcule la distancia promedio
+que existe en una sucesion o secuencia de 4 puntos, reportar esa distancia
+promedio, reportar la conexion menor y la conexion mayor.
+
+
