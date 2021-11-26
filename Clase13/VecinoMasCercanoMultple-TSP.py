@@ -45,7 +45,7 @@ def calcularMatrizCostos(red):
         for nombre_j, punto_j in red.items():
             costo = int()
             if nombre_i != nombre_j:
-                #costo = int(distanciaEUC_2D(red[nombre_i], red[nombre_j]))
+                # costo = int(distanciaEUC_2D(red[nombre_i], red[nombre_j]))
                 costo = distanciaEUC_2DV2(red[nombre_i], red[nombre_j])
                 matrizCostos[nombre_i+"-"+nombre_j] = costo
             # else: para no poner nada en distancia del mismo punto y evitar que el codigo se quede en un loop midiendo la distancia a si mismo
@@ -95,6 +95,9 @@ itinerario = list()
 itinerario.append(ciudadInicial)
 ciudadesSinCubrir = set(red.keys())
 ciudadesSinCubrir.remove(ciudadInicial)
+jornadasTSP = list()  # Separar en jornadas para regreso del agente viajero
+duracionMaxJornada = 10
+
 # Seccion principal del algoritmo (cubrir todas las ciudades como ciclo hamiltoniano)
 while len(ciudadesSinCubrir) > 0:
     # Construir el listado con las posibles salidas desde la ultima ciudad ingresada en el itinerario
@@ -103,16 +106,45 @@ while len(ciudadesSinCubrir) > 0:
         listadoSalidas.append(
             (ciudadSalida, matrizCostos[itinerario[-1]+'-'+ciudadSalida]))
     listadoSalidas = tuple(listadoSalidas)
+    # Seleccionar mejor salida
     mejorSalida = listadoSalidas[0]
     for salida in listadoSalidas:
         if mejorSalida[1] > salida[1]:
             mejorSalida = salida
-    # Actualizar el itinerario
-    itinerario.append(mejorSalida[0])
+
+    # Antes de actualizar itinerario, revisar si es una jornada viable
+    duracion = 0
+    for i in range(len(itinerario)-1):
+        duracion += matrizCostos[itinerario[i]+'-'+itinerario[i+1]]
+    duracion += matrizCostos[itinerario[-1]+'-'+mejorSalida[0]]
+    duracion += matrizCostos[mejorSalida[0]+'-'+ciudadInicial]
+    if duracion <= duracionMaxJornada:
+        # Actualizar el itinerario
+        itinerario.append(mejorSalida[0])
+    else:
+        # Cerrar el itinerario actual
+        itinerario.append(ciudadInicial)
+        # Agregarlo al listado de las jornadas
+        jornadasTSP.append(list(itinerario))
+        # Abrir nuevo itinerario
+        itinerario.clear()
+        itinerario = [ciudadInicial, mejorSalida[0]]
+
     # Actualizar el conjunto (entrando en el intenerario de la ciudad ahora esta cubierta)
     ciudadesSinCubrir.remove(mejorSalida[0])
 
-# Retorno a la ciudad base
+# Ingresar el ultimo itinerario si hace falta
 itinerario.append(ciudadInicial)
+if jornadasTSP[-1] != itinerario:
+    jornadasTSP.append(list(itinerario))
 
-print("Itinerario resultante: ", itinerario)
+# Visualizar los itinerarios generados
+print("------Itinerarios-------")
+[print(jornada) for jornada in jornadasTSP]
+
+# # Cuantificar la calidad de la solucion, tecnicamente eso se llama
+# # funcion objetivo 'fo'
+# fo = 0
+# for i in range(len(itinerario)-1):
+#     fo += matrizCostos[itinerario[i]+'-'+itinerario[i+1]]
+# print("Funcion objetivo (calidad) solucion: ", fo)
