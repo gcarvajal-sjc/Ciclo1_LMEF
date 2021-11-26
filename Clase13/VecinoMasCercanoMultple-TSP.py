@@ -78,14 +78,22 @@ print(matrizCostos)
 # sobre esta codificacion del problema
 
 # #Algoritmo o pseudocodigo del vecino mas cercano
-# 1. Establecer nodo o ciudad de partida
-# 2. Iniciar el itinerario o el tour en la ciudad de partida establecida
-# 3. Mientras tengamos ciudades sin cubrir en el itinerario:
-# 4.     Desde la ultima ciudad del itinerario revisamos las salidas a las demas ciudades
-# 5.     Seleccionar la mejor de las salidas
-# 6      Actualizar las ciudades sin cubrir
-# 7.     Agregar al itinerario la mejor de las salidas
-# 8.     Agregar al itinerario el regreso a la ciudad inicia o de partida
+# 1. Establecer nodo o ciudad de partida(radicado el agente)
+# 2. Preparar contenedor de jornadas
+# 3. Iniciar el itinerario o el tour en la ciudad de partida establecida
+# 4. Mientras tengamos ciudades sin cubrir en los itinerarios:
+# 5.     Desde la ultima ciudad del itinerario revisamos las salidas a las demas ciudades
+# 6.     Seleccionar la mejor de las salidas
+# 7.      Si agregar la ciudad no supera el tiempo maximo de jornada:
+# 8.                Agregar la ciudad (mejor de las salidas) al itinerario actual (crecimiento)
+# 9.         De lo contrario:
+# 10.                Cerrar itinerario con el retorno y agregarlo a las jornadas (dias)
+# 11.                Abrir el itinerario con la mejor ciudad que no fue acomodada en el itinerario anterior
+# 12     Actualizar las ciudades sin cubrir
+# 13. Si el itinerario que estaba en construccion no fue agregado en las jornadas:
+# 14.     Agregarlo
+# 15. Mostrar las jornadas
+# 16. Generar indicadores de las jornadas
 
 # Traduccion a Python
 print("-----Algoritmo Heuristico del vecino mas cercano-----")
@@ -96,7 +104,7 @@ itinerario.append(ciudadInicial)
 ciudadesSinCubrir = set(red.keys())
 ciudadesSinCubrir.remove(ciudadInicial)
 jornadasTSP = list()  # Separar en jornadas para regreso del agente viajero
-duracionMaxJornada = 10
+duracionMaxJornada = 9
 
 # Seccion principal del algoritmo (cubrir todas las ciudades como ciclo hamiltoniano)
 while len(ciudadesSinCubrir) > 0:
@@ -141,6 +149,26 @@ if jornadasTSP[-1] != itinerario:
 # Visualizar los itinerarios generados
 print("------Itinerarios-------")
 [print(jornada) for jornada in jornadasTSP]
+
+# Funcion para calcular duracion de los itinerarios
+
+
+def calcularDuracion(itinerario, matrizCostos):
+    duracion = 0
+    for i in range(len(itinerario)-1):
+        duracion += matrizCostos[itinerario[i]+'-'+itinerario[i+1]]
+    return duracion
+
+
+# Contenedor ampliado de los itinerarios
+jornadasDetalle = dict()
+for i, jornada in enumerate(jornadasTSP):
+    jornadasDetalle[f"Jornada{i+1}"] = {'itinerario': jornada,
+                                        'duracion': calcularDuracion(jornada, matrizCostos)}
+
+# Mostar en pantalla
+[print(llave, valor) for llave, valor in jornadasDetalle.items()]
+
 
 # # Cuantificar la calidad de la solucion, tecnicamente eso se llama
 # # funcion objetivo 'fo'
