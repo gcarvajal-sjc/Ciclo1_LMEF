@@ -50,7 +50,7 @@ red = {
 
 
 def distanciaEUC_2D(punto1, punto2):
-    return int (((punto1[0]-punto2[0])**2 + (punto1[1]-punto2[1])**2)**(1/2))+ 0.5
+    return int(((punto1[0]-punto2[0])**2 + (punto1[1]-punto2[1])**2)**(1/2)) + 0.5
 
 
 # Ejemplo distancia entre A y B
@@ -60,24 +60,24 @@ distanciaA_B = {'A-B': int(distanciaEUC_2D(red['A'], red['B']))}
 # 5. Red diccionario anidado
 
 red = {
-    'A': {'x': 8, 'y': 11},
-    'B': {'x': 7, 'y': 8},
-    'C': {'x': 9, 'y': 5.5},
-    'D': {'x': 9, 'y': 7},
-    'E': {'x': 10, 'y': 10}
+    'Armenia': {'x': 8, 'y': 11},
+    'Pereira': {'x': 7, 'y': 8},
+    'Cali': {'x': 9, 'y': 5.5},
+    'Cartago': {'x': 9, 'y': 7},
+    'Manizales': {'x': 10, 'y': 10}
 }
 
 # Distancia euclidiana (2D) Version2 usando el diccionario anidado definido en linea 62
 
 
 def distanciaEUC_2DV2(punto1, punto2):
-    return int (((punto1['x']-punto2['x'])**2 + (punto1['y']-punto2['y'])**2)**(1/2) + 0.5)
+    return int(((punto1['x']-punto2['x'])**2 + (punto1['y']-punto2['y'])**2)**(1/2) + 0.5)
 
 
 # Funcion para el calculo de la matriz de costos usando diccionario anidado
 
 def calcularMatrizCostos(red):
-    matrizCostos = dict() 
+    matrizCostos = dict()
     for nombre_i, punto_i in red.items():
         for nombre_j, punto_j in red.items():
             costo = int()
@@ -110,3 +110,15 @@ matrizCostos = calcularMatrizCostos(red)
 
 print('--------------')
 print(matrizCostos)
+
+# Consultar la estrategia del vecino mas cerano e intentar implementarla
+#sobre esta codificacion del problema
+
+#Algoritmo o pseudocodigo del vecino mas cercano
+1. Establecer nodo o ciudad de partida
+2. Iniciar el itinerario o el tour en la ciudad de partida establecida
+3. Mientras tengamos ciudades sin cubrir en el itinerario:
+4.     Desde la ultima ciudad del itinerario revisamos las salidas a las demas ciudades
+5.     Seleccionar la mejor de las salidas
+6      Actualizar las ciudades sin cubrir 
+7.     Agregar al itinerario la mejor de las salidas
