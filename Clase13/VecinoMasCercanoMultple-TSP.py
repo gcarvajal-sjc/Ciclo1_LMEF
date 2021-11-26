@@ -161,6 +161,8 @@ def calcularDuracion(itinerario, matrizCostos):
 
 
 # Contenedor ampliado de los itinerarios
+print("-----------------------------")
+print('Diccionarion Detalle Jornadas')
 jornadasDetalle = dict()
 for i, jornada in enumerate(jornadasTSP):
     jornadasDetalle[f"Jornada{i+1}"] = {'itinerario': jornada,
