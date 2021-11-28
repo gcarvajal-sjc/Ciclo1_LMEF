@@ -47,13 +47,18 @@ tipoSangre = ['A+', 'O+', 'AB+']
 listadoPacientes = list(zip(nombres, edades, tipoSangre))
 print(listadoPacientes)
 
-# Zip de diferentes contenedores, vea que el contenedor palabra manda
+# Zip de diferentes coleccoines, vea que la coleccion palabra manda
 # sobre la cantidad de tuplas que se arman en el zip, ya que el numero
-# de elementos en los contenedores es diferente.
-nombres = ['juan', 'luis', 'ana']
-edades = ('12', '15', '22')
-tipoSangre = ['A+', 'O+', 'AB+']
-palabra = "Tripulante"
+# de elementos en las colecciones es diferente.
+# nombres = ['juan', 'luis', 'ana']
+# edades = ('12', '15', '22')
+# tipoSangre = ['A+', 'O+', 'AB+']
+# palabra = "Tripulante"
 
-listadoPacientes = list(zip(nombres, edades, tipoSangre, palabra))
-print(listadoPacientes)
+# listadoPacientes = list(zip(nombres, edades, tipoSangre, palabra))
+# print(listadoPacientes)
+
+# Colecciones que podemos extraer del diccionario
+print("Llaves del diccionario: ", diccionarioCadena.keys())
+print("Valores del diccionario: ", diccionarioCadena.values())
+print("Valores del diccionario: ", diccionarioCadena.items())
