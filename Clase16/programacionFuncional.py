@@ -30,11 +30,15 @@ def operacion(signo):
 
 
 def calculadora(signo, a, b):
-    # Construir o solicitar a otra funcion la construccion del proceso que debe hacer
-    funcionAplicar = operacion(signo)
+    # # Construir o solicitar a otra funcion la construccion del proceso que debe hacer
+    # funcionAplicar = operacion(signo)
 
-    # Aplicar funcion construida en tiempo de ejecucion
-    return funcionAplicar(a, b)
+    # # Aplicar funcion construida en tiempo de ejecucion
+    # return funcionAplicar(a, b)
+
+    # Mas resumido que las lineas de la 33 a la 37
+
+    return operacion(signo)(a, b)
 
 
 # Utilizar funcion
@@ -43,3 +47,8 @@ print(calculadora('-', 7, 8))
 print(calculadora('*', 7, 8))
 print(calculadora('/', 7, 8))
 print(calculadora('+adfdf', 7, 8))
+
+# Utilizar funcion recogiendo info del teclado
+print(calculadora(input('Signo -> '), int(input('a = ')), int(input('b = '))))
+
+
