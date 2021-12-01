@@ -7,6 +7,7 @@
 # Requerimiento: Coleccion con las notas aprobadas para luego obtener el
 # promedio de los que pasaron la materia
 
+from functools import reduce
 import random
 
 
@@ -79,3 +80,20 @@ personasMenoresEdad = list(filter(esMenorDeEdad, grupoPersonasAmpliado))
 print('---------------------------')
 print('Menores de Edad')
 [print(persona) for persona in personasMenoresEdad]
+
+# Reduce -> Devuelve solo un elemento, puede ser una coleccion que salga
+# de acumular informacion. Ejemplo una coleccion de numeros y quiero sumarlos
+
+# Sumatoria de una coleccion de numeros
+
+numeros = list(range(1, 10))
+print('Lista generada ', numeros)
+# Reduce recibe dos parametros: un acumulador que es buena idea inicializarlo
+# un 2do elemento que se llama elemento  y retorna lo que se haga con el
+# elemento y el acumulador sobre la coleccion
+print('Resultado reduce es -> ', reduce(lambda elemento=0,
+      acumulador=0: elemento+acumulador, numeros))
+
+# Req: Concatenar en una cadena todos los nombres del listado de personas
+print(reduce(lambda nombresConcatenados='',
+      persona='': nombresConcatenados + ' ' + persona,  map(lambda x: x[0], grupoPersonas)))
