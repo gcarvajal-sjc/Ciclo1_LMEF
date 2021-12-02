@@ -47,10 +47,15 @@ def cajerosModelosRequeridos(modelo):
 print('Cajeros con toda la info de los modelos solicitados')
 # Por cada pareja llave/valor(caso1.items), en x queda cargado cada pareja llave/valor
 # extraigo le mando a la funcion de predicado exclusivamente ese campo que es 'modeloCajero'
-listadoCajerosModelos = list(filter(lambda x: cajerosModelosRequeridos(
-    x[1]['modeloCajero']), caso1.items()))
-pp.pprint(listadoCajerosModelos)
-print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
+
+# listadoCajerosModelos = list(filter(lambda x: cajerosModelosRequeridos(x[1]['modeloCajero']), caso1.items()))
+# pp.pprint(listadoCajerosModelos)
+#print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
+
+cajerosModelo = list(filter(
+    lambda x: x[1]['modeloCajero'] == 101 or x[1]['modeloCajero'] == 2017, caso1.items()))
+pp.pprint(cajerosModelo)
+print('Numero de cajeros con el modelo solicitado -> ', len(cajerosModelo))
 
 
 # # Diccionario
@@ -63,4 +68,4 @@ print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelo
 # # Ver las llaves, los valores o los items(llave,valor)
 # print(diccionario.keys())
 # print(diccionario.values())
-# print(diccionario.items())
+# print(diccionario.items()) #esto es una tupla
