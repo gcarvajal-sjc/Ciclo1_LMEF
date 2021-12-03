@@ -1,3 +1,4 @@
+from functools import reduce
 from casosGenerados import *
 
 # 1)Obtener todas las transferencias realizadas en el último trimestre en los cajeros
@@ -28,44 +29,105 @@ import pprint as pp
 
 # Algoritmo para REQ 1:
 # 1. Sacar la info de los cajeros modelo 101 y 2017
-# 2. Colecconar las transferencias de los cajeros solicitados
-# 3. Obtener las que se realizaron en el ultimo trimestre(Marzo, Abril, Mayo de 2021)
+# 2. Colleccionar las transacciones de los cajeros de los modelos solicitados
+# 3. Filtrar las transferencias de las transacciones
+# 4. Obtener las transacciones que se realizaron en el ultimo trimestre(Marzo, Abril, Mayo de 2021)
 
 
-def esModelo101(modelo):
-    return modelo == 101
+def requerimiento1(caso):
+
+    def esModelo101(modelo):
+        return modelo == 101
+
+    def esModelo2017(modelo):
+        return modelo == 2017
+
+    def cajerosModelosRequeridos(modelo):
+        return any([esModelo101(modelo), esModelo2017(modelo)])
+
+    #print('Cajeros con toda la info de los modelos solicitados')
+    # Por cada pareja llave/valor(caso1.items), en x queda cargado cada pareja llave/valor
+    # extraigo le mando a la funcion de predicado exclusivamente ese campo que es 'modeloCajero'
+
+    # Version usando predicados
+    # listadoCajerosModelos = list(filter(lambda x: cajerosModelosRequeridos(x[1]['modeloCajero']), caso1.items()))
+    # pp.pprint(listadoCajerosModelos)
+    #print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
+
+    # Version usando las expresiones directamente osea de forma explicita
+    cajerosModelo = list(filter(
+        lambda x: x[1]['modeloCajero'] == 101 or x[1]['modeloCajero'] == 2017, caso.items()))
+    # pp.pprint(cajerosModelo)
+    #print('Numero de cajeros con el modelo solicitado -> ', len(cajerosModelo))
+
+    # # Diccionario
+    # palabra = 'mesopotamia'
+    # # zip entre dos colecciones: la palabra, y unos valores que son exactamente
+    # # el mismo numero de las letras que hay en palabras
+    # diccionario = dict(zip(range(len(palabra)), palabra))
+    # pp.pprint(diccionario)
+
+    # # Ver las llaves, los valores o los items(llave,valor)
+    # print(diccionario.keys())
+    # print(diccionario.values())
+    # print(diccionario.items()) #esto es una tupla
+
+    # 2. Coleccionar las transacciones de los cajeros de los modelos solicitados
+
+    listaListaTransacciones = list(
+        map(lambda x: x[1]['transacciones'], cajerosModelo))
+    # pp.pprint(listaListaTransacciones)
+
+    # Concatenar los elementos de casda lista en una sola lista con reduce
+
+    # Tenemos una lista vacia y una lista de diccionarios con las transacciones
+    # Entonces empieza la funcion reduce -> la lista esta vacia y se encuentra
+    # un diccionario, entonces le pega todos los elementos que hay en esa lista
+    # (de diccionarios)  a la lista vacia, despues hay otra lista de diccionarios
+    # entoces se carga otra lista de diccionarios y asi se va acumulado sucesivamente
+
+    listaTransacciones = reduce(lambda acumulador=list(
+    ), elemento=dict(): acumulador+elemento, listaListaTransacciones)
+    # pp.pprint(listaTransacciones)
+
+    # 3. Filtrar las transferencias de las transacciones
+    # Es una lista de diccionarios ->cada elemento de la
+    # lista(listaTransacciones) es el que esta en x (en x queda un diccionario)
+    # transferencias = list(filter(
+    #     lambda x: x['tipoMovimiento'] == 'transferencia', listaTransacciones))
+    # con el predicado (mismo ejemplo de las lineas 93-98)
+
+    def esTransferencia(transaccion):
+        return transaccion['tipoMovimiento'] == 'transferencia'
+
+    transferencias = list(filter(esTransferencia, listaTransacciones))
+    # print('--------------------------')
+    # print('Listado de transferencias')
+    # pp.pprint(transferencias)
+
+    # 4. Obtener las transacciones que se realizaron en el ultimo trimestre(Marzo, Abril, Mayo de 2021)
+
+    def perteneceAlUltimoTrimestre(transaccion):
+        # Trimestre actual va desde 03-2021, al 05-2021 (marzo a mayo)
+        fecha = transaccion['fechaMovimiento']
+        return any([fecha[3:] == '03-2021', fecha[3:] == '04-2021', fecha[3:] == '05-2021'])
+
+    transferenciasUltimoTrimestre = tuple(filter(
+        perteneceAlUltimoTrimestre, transferencias))
+    # print()
+    # print()
+    # print()
+    # print('Respuesta del requerimiento')
+    # pp.pprint(transferenciasUltimoTrimestre)
+
+    # Retornar la informacion extraida
+    return transferenciasUltimoTrimestre
 
 
-def esModelo2017(modelo):
-    return modelo == 2017
+# Consulta del requerimiento 1 aplicada a varios casos
+print("-----------Caso 1")
+print(requerimiento1(caso1))
 
-
-def cajerosModelosRequeridos(modelo):
-    return any([esModelo101(modelo), esModelo2017(modelo)])
-
-
-print('Cajeros con toda la info de los modelos solicitados')
-# Por cada pareja llave/valor(caso1.items), en x queda cargado cada pareja llave/valor
-# extraigo le mando a la funcion de predicado exclusivamente ese campo que es 'modeloCajero'
-
-# listadoCajerosModelos = list(filter(lambda x: cajerosModelosRequeridos(x[1]['modeloCajero']), caso1.items()))
-# pp.pprint(listadoCajerosModelos)
-#print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
-
-cajerosModelo = list(filter(
-    lambda x: x[1]['modeloCajero'] == 101 or x[1]['modeloCajero'] == 2017, caso1.items()))
-pp.pprint(cajerosModelo)
-print('Numero de cajeros con el modelo solicitado -> ', len(cajerosModelo))
-
-
-# # Diccionario
-# palabra = 'mesopotamia'
-# # zip entre dos colecciones: la palabra, y unos valores que son exactamente
-# # el mismo numero de las letras que hay en palabras
-# diccionario = dict(zip(range(len(palabra)), palabra))
-# pp.pprint(diccionario)
-
-# # Ver las llaves, los valores o los items(llave,valor)
-# print(diccionario.keys())
-# print(diccionario.values())
-# print(diccionario.items()) #esto es una tupla
+# Consulta del requerimiento 1 aplicada a varios casos
+print("-----------Caso 2")
+print(requerimiento1(caso2))
