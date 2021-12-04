@@ -45,20 +45,20 @@ def requerimiento1(caso):
     def cajerosModelosRequeridos(modelo):
         return any([esModelo101(modelo), esModelo2017(modelo)])
 
-    #print('Cajeros con toda la info de los modelos solicitados')
+    # print('Cajeros con toda la info de los modelos solicitados')
     # Por cada pareja llave/valor(caso1.items), en x queda cargado cada pareja llave/valor
     # extraigo le mando a la funcion de predicado exclusivamente ese campo que es 'modeloCajero'
 
     # Version usando predicados
     # listadoCajerosModelos = list(filter(lambda x: cajerosModelosRequeridos(x[1]['modeloCajero']), caso1.items()))
     # pp.pprint(listadoCajerosModelos)
-    #print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
+    # print('Numero de cajeros con el modelo solicitado -> ', len(listadoCajerosModelos))
 
     # Version usando las expresiones directamente osea de forma explicita
     cajerosModelo = list(filter(
         lambda x: x[1]['modeloCajero'] == 101 or x[1]['modeloCajero'] == 2017, caso.items()))
     # pp.pprint(cajerosModelo)
-    #print('Numero de cajeros con el modelo solicitado -> ', len(cajerosModelo))
+    # print('Numero de cajeros con el modelo solicitado -> ', len(cajerosModelo))
 
     # # Diccionario
     # palabra = 'mesopotamia'
@@ -141,9 +141,25 @@ def req1Procedural(caso):
     return transaccionesCajeros
 
 
+# REQ 3 Todas las transacciones de los cajeros cerrados que pertenecen a la firma integrada
+def declarativoReq3(caso):
+    # Predicado
+    def cajerosRequeriminto(cajero):
+        return all([cajero[0][-2:] == 'FI', cajero[1]['estado'] == 'Cerrado'])
+
+    cajeros = list(filter(cajerosRequeriminto, caso.items()))
+
+    listaListasTransacciones = list(
+        map(lambda x: x[1]['transacciones'], cajeros))
+    listaTransacciones = reduce(lambda acumulador=list(
+    ), elemento=dict(): acumulador + elemento, listaListasTransacciones)
+
+    pp.pprint(listaTransacciones)
+    print('Num lista transacciones', len(listaTransacciones))
+
+
 # Consulta del requerimiento 1 aplicada a varios casos
 # Llamado a las soluciones imperativas
-
 print("-----------Caso 1")
 resultadoProcedural = req1Procedural(caso1)
 pp.pprint(resultadoProcedural)
@@ -161,3 +177,6 @@ print('Iguales') if resultadoProcedural == list(resultadoDeclarativo) else print
 # # Consulta del requerimiento 1 aplicada a varios casos
 # print("-----------Caso 2")
 # print(requerimiento1(caso2))
+
+# Llamado solucion declarativa REQ 3
+declarativoReq3(caso1)
