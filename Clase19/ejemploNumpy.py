@@ -82,3 +82,30 @@ for i in range(len(matrizAleatoria)):
 # Consultas (recorrer extraer partes del contenedor)
 matrizAleatoria = np.random.randint(3, size=(3, 3))
 print(matrizAleatoria)
+
+# Operaciones (Las columnas son el eje 0 ->eje Y, y las filas el eje 1 -> eje X)
+sumatoriaColumnas = np.sum(matrizAleatoria, axis=0)
+print(sumatoriaColumnas)
+
+sumatoriaFilas = np.sum(matrizAleatoria, axis=1)
+print(sumatoriaFilas)
+
+print('Sumatoria de toda la matriz', np.sum(matrizAleatoria))
+
+print("Diagonal de la matriz:")
+print(matrizAleatoria.diagonal())
+print('La transpuesta (para visualizaciones)')  # Las filas las vuelve columnas
+print(matrizAleatoria.transpose())
+
+print("Espejo de las columnas")
+print(np.fliplr(matrizAleatoria))
+
+# El espejo sirve si queremos la diagonal contraria y pedimos nuevamente la diagonal
+print("Diagonal contraria")
+print(np.fliplr(matrizAleatoria).diagonal())
+
+print("Efecto sobre la matriz original")
+print(matrizAleatoria)
+
+print('Ubicacion de los valores iguales a 2')
+print(np.where(matrizAleatoria == 2))
