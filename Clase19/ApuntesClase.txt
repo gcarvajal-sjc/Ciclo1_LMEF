@@ -1,0 +1,7 @@
+Sesion 19
+-> Reto4 (exploracion en un estructura de datos intrincada)
+    -> Paradigma imperativo
+    -> Paradigma Declarativo
+-> numpy (arreglos) -> Medio
+-> Manejo de archivos
+-> Analitica y visualizacion de datos basica -> Pandas (sombre numpy)
