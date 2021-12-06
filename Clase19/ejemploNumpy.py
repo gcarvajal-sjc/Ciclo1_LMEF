@@ -50,3 +50,35 @@ np.random.shuffle(requerimientoJahleel)
 print('Sin repeticiones y orden aleatorio', requerimientoJahleel)
 
 # Consultas (recorrer extraer partes del contenedor)
+matrizAleatoria = np.random.randint(-5, 5, size=(6, 4))
+print(matrizAleatoria)
+
+# # Consultar tamaño
+# print("Numero de filas ->", len(matrizAleatoria))
+# print("Numero de columnas ->", len(matrizAleatoria[0]))
+# print("Forma de la matriz ->", np.shape(matrizAleatoria))
+# print("Tipo de la forma ->", type(np.shape(matrizAleatoria)))
+
+# Acceder a valores o a posiciones
+print("Valor de la esquina superior izq ->", matrizAleatoria[0, 0])
+print("Valor de la diagonal ->", matrizAleatoria[2, 2])
+
+submatriz = matrizAleatoria[1:4, 1:]
+print(submatriz)
+
+# Recorridos for-> con variables auxiliares o temporales, con subindices
+print("Recorrido 1 de la matriz aleatoria")
+for fila in matrizAleatoria:
+    for columna in fila:
+        print(columna, end=' ')
+    print()
+print("Recorrido 2 de la matriz aleatoria")
+for i in range(len(matrizAleatoria)):
+    for j in range(len(matrizAleatoria[i])):
+        print(matrizAleatoria[i, j], end=' ')
+    print()
+
+
+# Consultas (recorrer extraer partes del contenedor)
+matrizAleatoria = np.random.randint(3, size=(3, 3))
+print(matrizAleatoria)
