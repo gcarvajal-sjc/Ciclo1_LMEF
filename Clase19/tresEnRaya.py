@@ -120,7 +120,19 @@ mostrarTablero(tablero)
 
 # Simulacion
 while True:
-    # Revisar si el tablero aun tiene posiciones
+    # Revisar el estado del tablero
+    estado = estadoTablero(tablero)
+    if estado == 1:
+        print('Gano el jugador O!')
+        break
+    elif estado == 10:
+        print('Gano el jugador X!')
+        break
+    elif estado == 0:
+        print('Empate!!')
+        break
+
+        # Revisar si el tablero aun tiene posiciones
     casillasVacias = np.where(tablero == 0)
     if len(casillasVacias[0]) == 0:
         break
