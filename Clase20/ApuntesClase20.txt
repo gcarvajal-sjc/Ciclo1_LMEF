@@ -1,0 +1,5 @@
+Session 20
+----------
+-> Pandas (series y dataframes)
+-> Manejo de archivos
+-> Analitica y visualizacion de datos basica -> Pandas (sobre numpy)
