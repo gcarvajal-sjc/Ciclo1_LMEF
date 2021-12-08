@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import random
+import matplotlib.pyplot as plt
 
 from pandas.core.accessor import PandasDelegate
 
@@ -32,7 +33,7 @@ numEstudiantes = 10
 nombres = ['carlos', 'pedro', 'juan', 'natalia', 'valentina', 'camila']
 codigos = ['asjhd1', 'asjhd2', 'asjhd3', 'asjhd4', 'asjhd5',
            'asjhd7', 'asjhd8', 'asjhd9', 'asjhd6', 'asjhd0']
-estado = ['matriculado', 'suspendido', 'becado']
+estado = ['matriculado', 'suspendido', 'becado', 'egresado', 'posgrado']
 # notacion de list comprehension con for sencillo. Hacer algo cierto
 # numero de veces pero no necesito llevar un conteo, no necesito tener
 # una memoria auxiliar que me este cargando la info -> entonces no
@@ -96,6 +97,21 @@ print('Dataframe haciendo grupos de registros')
 dfMedia = df.groupby(['Estado'])['PromedioAjustado'].mean()
 print(dfMedia)
 print()
+
+dfMedia.plot(kind='barh')
+# dfMedia.plot()
+
 # Cuantos estudiantes hay en cada grupo de estados
 dfNumEstudiantesEstado = df.groupby(['Estado'])[['Estado']].count()
 print(dfNumEstudiantesEstado)
+print()
+
+
+print(df.describe())
+print()
+print(df.info())
+print()
+
+
+dfNumEstudiantesEstado.plot(kind='pie', y='Estado')
+plt.show()  # Esto se corre desde la terminal y se le da: python3 ejemplosPandas.py y ya sale el dibujo del pastel. Aunque a mi me sale el paste desde aca sin problema
