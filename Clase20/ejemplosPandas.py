@@ -43,12 +43,13 @@ estado = ['matriculado', 'suspendido', 'becado']
 # serie1 y automaticamente va a tener unos autonumericos, lo mismo para serie2
 serie1 = pd.Series([random.choice(nombres) for _ in range(numEstudiantes)])
 serie2 = pd.Series([random.randint(100, 200)for _ in range(numEstudiantes)])
+# serie3 = pd.Series([random.choice(estado) for _ in range(numEstudiantes)], index=[0, 1, 2, 3, 55, 4, 5, 6, 7, 8])  # 55 is out of range therefore it solves it as NaN
 serie3 = pd.Series([random.choice(estado)
-                   for _ in range(numEstudiantes)], index=[0, 1, 2, 3, 55, 4, 5, 6, 7, 8])  # 55 is out of range therefore it solves it as NaN
+                   for _ in range(numEstudiantes)], range(numEstudiantes))
 print(serie1)
 print(serie2)
 print(serie3)
-diccionarioSeries = {'Nombres': serie1, 'Puntaje': serie2}
+diccionarioSeries = {'Nombres': serie1, 'Puntaje1': serie2}
 # Si las dos series tienen el mismo tamańo se puede armar el dataframe.
 # Los indices tienen que ser comunes (osea que tengan el mismo numero de datos)
 # df = pd.DataFrame(serie1, serie2)
@@ -71,3 +72,30 @@ serie5 = pd.Series([random.randint(50, 120)
 df['Puntaje3'] = serie5
 print(df)
 print()
+
+# Obtener el promedio de los estudiantes y agregarlo at df
+df['Promedio'] = (df['Puntaje1']+df['Puntaje2']+df['Puntaje3'])/3
+df['PromedioAjustado'] = (
+    df['Puntaje1']+df['Puntaje2']+(df['Puntaje3']+0.2*df['Puntaje3']))/3
+print(df)
+print()
+
+print('Estudiantes Aprobados')
+dfAprobados = df[df['PromedioAjustado'] > 130]
+print()
+
+# Se pueden ir encadenando los filtros, ahora aca se le añaden los becados
+# Solamente estudiantes becados que aprobaron (promedio ajustado >130)
+print('Estudiantes Aprobados Becados')
+dfAprobados = df[df['PromedioAjustado'] > 130][df['Estado'] == 'becado']
+print(dfAprobados)
+print()
+
+# Media (calificacion promedio) de los estudiantes por grupos de estados
+print('Dataframe haciendo grupos de registros')
+dfMedia = df.groupby(['Estado'])['PromedioAjustado'].mean()
+print(dfMedia)
+print()
+# Cuantos estudiantes hay en cada grupo de estados
+dfNumEstudiantesEstado = df.groupby(['Estado'])[['Estado']].count()
+print(dfNumEstudiantesEstado)
