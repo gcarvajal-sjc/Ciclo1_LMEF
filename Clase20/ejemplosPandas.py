@@ -30,7 +30,8 @@ print('Valores', serieDiccionario.values)
 # Dataframe -> varias series
 numEstudiantes = 10
 nombres = ['carlos', 'pedro', 'juan', 'natalia', 'valentina', 'camila']
-codigos = ['asjhd7', 'asjhd8', 'asjhd9', 'asjhd2', 'asjhd1']
+codigos = ['asjhd1', 'asjhd2', 'asjhd3', 'asjhd4', 'asjhd5',
+           'asjhd7', 'asjhd8', 'asjhd9', 'asjhd6', 'asjhd0']
 estado = ['matriculado', 'suspendido', 'becado']
 # notacion de list comprehension con for sencillo. Hacer algo cierto
 # numero de veces pero no necesito llevar un conteo, no necesito tener
@@ -40,10 +41,10 @@ estado = ['matriculado', 'suspendido', 'becado']
 # y esa lista se le manda a la serie, como no se le especifica un indice y
 # solo se le manda una lista, se va a convertir en una columna que es
 # serie1 y automaticamente va a tener unos autonumericos, lo mismo para serie2
-serie1 = pd.Series([random.choice(nombres) for _ in range(5)])
-serie2 = pd.Series([random.randint(100, 200)for _ in range(5)])
+serie1 = pd.Series([random.choice(nombres) for _ in range(numEstudiantes)])
+serie2 = pd.Series([random.randint(100, 200)for _ in range(numEstudiantes)])
 serie3 = pd.Series([random.choice(estado)
-                   for _ in range(5)], index=[0, 1, 2, 3, 55])  # 55 is out of range therefore it solves it as NaN
+                   for _ in range(numEstudiantes)], index=[0, 1, 2, 3, 55, 4, 5, 6, 7, 8])  # 55 is out of range therefore it solves it as NaN
 print(serie1)
 print(serie2)
 print(serie3)
@@ -58,10 +59,15 @@ print('Nombres columnas')
 print(df.columns)
 df.columns.name = 'Estudiantes'
 df.index.name = 'Autonumerico'
-df_original = df.copy()
+# df_original = df.copy()
+# print('Original')
+# print(df_original)
 df.set_index('Codigo', inplace=True)
+serie4 = pd.Series([random.randint(100, 200)
+                   for _ in range(numEstudiantes)], index=codigos)
+df['Puntaje2'] = serie4
+serie5 = pd.Series([random.randint(50, 120)
+                   for _ in range(numEstudiantes)], index=codigos)
+df['Puntaje3'] = serie5
 print(df)
 print()
-print()
-print('Original')
-print(df_original)
