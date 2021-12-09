@@ -1,0 +1,11 @@
+asjhd1 pedro matriculado
+asjhd2 natalia becado
+asjhd3 juan matriculado
+asjhd4 natalia matriculado
+asjhd5 juan posgrado
+asjhd7 juan posgrado
+asjhd8 camila becado
+asjhd9 valentina egresado
+asjhd6 camila suspendido
+asjhd0 valentina suspendido
+asjh12 john casado

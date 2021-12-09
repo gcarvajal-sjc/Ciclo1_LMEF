@@ -114,4 +114,9 @@ print()
 
 
 dfNumEstudiantesEstado.plot(kind='pie', y='Estado')
+
+diccionarioConteo = dfNumEstudiantesEstado.to_dict()
+print('Dataframe a diccionario')
+print(diccionarioConteo)
+
 plt.show()  # Esto se corre desde la terminal y se le da: python3 ejemplosPandas.py y ya sale el dibujo del pastel. Aunque a mi me sale el paste desde aca sin problema
