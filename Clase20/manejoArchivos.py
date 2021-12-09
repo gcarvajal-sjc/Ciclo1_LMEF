@@ -82,3 +82,9 @@ with open('lectura.json') as manejadorArchivo:
     diccionarioJson = json.load(manejadorArchivo)
 print('Diccionario JSON')
 pp.pprint(diccionarioJson)
+
+# Falta la conexion final: pandas con archivos: Pandas trae una lectura
+# super sencilla, la operacion se llama READ. La abre un manejador,
+# que la recorre bajo cierto formato. Todo lo que recorre lo convierte
+# en series, y esas series, las convierte a un data frame. Todo queda
+# cargado en un dataframe con una sola instruccion.
