@@ -11,7 +11,7 @@
 # 3.a si encontramos una @ incrementa contador de arrobas
 # 4. Revisar el numero de arrobas y reportar si el correo es valido en este contexto.
 
-# Traduccion Python
+# Traduccion Python -
 
 def validarCorreo(email):
     contadorArrobas = 0
