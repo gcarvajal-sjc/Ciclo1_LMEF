@@ -69,4 +69,4 @@ def indicadoresPetroleo(rutaArchivo):
 # Seccion principal
 print(indicadoresPetroleo('BaseDeDatosReto5.csv'))
 
-# CONTINUA EN 2:10 DEL 16/06/21
+# CONTINUA EN 2:11:30 DEL 16/06/21

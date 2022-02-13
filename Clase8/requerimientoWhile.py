@@ -28,6 +28,7 @@ while quiereIngresarNumeros:
     # respuesta = input("Desea continuar? (s/n)")
     # if respuesta == 'n':
     #     quiereIngresarNumeros = False
+    # linea 31 tiene que ser la negacion de 'n' porque si uno entra n seria TRUE
     quiereIngresarNumeros = input("Desea continuar? (s/n)") != 'n'
 
 print(
