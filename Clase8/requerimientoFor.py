@@ -43,7 +43,7 @@ def validarCorreo(email):
     if contadorArrobas == 1:
         return f'El correo tiene el numero correcto de arrobas'
     elif contadorArrobas == 0:
-        return f'El correo no tiene diferencicado el dominio. 0 arrobas encotradas'
+        return f'El correo no tiene diferencicado el dominio. 0 arrobas encontradas'
     elif contadorArrobas > 1:
         return f'El correo tiene {contadorArrobas -1} arroba(s) de sobra'
 
